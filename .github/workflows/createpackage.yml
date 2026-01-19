@@ -1,25 +1,43 @@
-name: Create Unity Package
+name: Build UnityPackage
 
 on:
   push:
-    tags:
-      - '*'
+    branches:
+      - master
 
 jobs:
-  echo:
+  build:
     runs-on: ubuntu-latest
+
     steps:
-    - uses: actions/checkout@v2
-    - run: |
-        find ./ -name \*.meta >> metaList
+      - name: Checkout repository
+        uses: actions/checkout@v4
 
-    - run: mkdir a
+      # Opcional: define un nombre y versión simples
+      - name: Set variables
+        run: |
+          echo "PACKAGE_NAME=AutoVariables" >> $GITHUB_ENV
+          echo "VERSION=${GITHUB_SHA::7}" >> $GITHUB_ENV
+          echo "UNITYPACKAGE=AutoVariables-${GITHUB_SHA::7}.unitypackage" >> $GITHUB_ENV
 
-    - uses: pCYSl5EDgo/create-unitypackage@master
-      with:
-        package-path: 'a/AutoVariables.${{ github.ref }}.unitypackage'
-        include-files: metaList
-    - uses: actions/upload-artifact@master
-      with:
-        path: a
-        name: package
+      # Recolecta todos los .meta dentro de Source/
+      - name: Track meta files
+        run: |
+          find Source/ -name "*.meta" > metaList
+
+      # Crea el .unitypackage desde Source/
+      - name: Create UnityPackage
+        uses: pCYSl5EDgo/create-unitypackage@b5c57408698b1fab8b3a84d4b67f767b8b7c0be9
+        with:
+          package-path: ${{ env.UNITYPACKAGE }}
+          include-files: metaList
+
+      # Crea (o actualiza) un Release y sube el archivo
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ env.VERSION }}
+          name: Release ${{ env.VERSION }}
+          files: ${{ env.UNITYPACKAGE }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
