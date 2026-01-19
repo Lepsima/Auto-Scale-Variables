@@ -3,4 +3,4 @@ I gave variables a measurement scale (km, m, cm) and made them autoconvert to ea
 
 ---
 It's fucking easy, '''Meter(1000) + KiloMeter(1)''' results in 2000 in the SI unit, you can read, convert, etc...
-Im working now on adding conversion from velocity to position automatically based on deltatime and this shit
+<br>Im working now on adding conversion from velocity to position automatically based on deltatime and this shit
