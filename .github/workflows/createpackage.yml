@@ -2,8 +2,8 @@ name: Build UnityPackage
 
 on:
   push:
-    branches:
-      - master
+    tags:
+      - '*'
 
 jobs:
   build:
