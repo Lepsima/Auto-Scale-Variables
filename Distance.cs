@@ -5,15 +5,16 @@ namespace AutoScaleVariables {
 
 public class TEST {
 	public void T() {
-		Length dist = Meter(100) + KiloMeter(2);
-		dist += MilliMeter(5152);
-		Debug.Log(dist);
-		// Dist is 2105.152 meters, the left scale is used for the result
-
-		Angle angleToTarget = Degree(200) + Radian(5);
-
-		Length2 position2d = Meter(new Vector2(200, 500)) + KiloMeter(new Vector2(1, 5.2f));
-		Length3 position3d = Meter(new Vector3(200, 500)) + KiloMeter(new Vector3(1, 5.2f));
+		Length position = Meter(0);
+		Velocity velocity = MeterSecond(10);
+		
+		// let's say Time.deltaTime is 1/50 
+		
+		for (int i = 0; i < 50; i++) {
+			//position += velocity;
+		}
+		
+		Debug.Log(position);
 	}
 }
 
