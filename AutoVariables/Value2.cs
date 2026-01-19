@@ -415,7 +415,7 @@ public class Acceleration2 : Value2 {
 	public Acceleration2(Vector2 value, float scale = 1) : base(value, scale) { }
 
 	public Acceleration2(Force2 force, Mass mass) : base(force.value / mass.value) { }
-
+	
 	public Velocity2 Velocity2(Time time) {
 		return new Velocity2(value * time);
 	}
@@ -470,6 +470,9 @@ public class Value2 {
 		this.value = value * scale;
 	}
 
+	public float sqrMagnitude => value.x*value.x + value.y*value.y;
+	public float magnitude => MathF.Sqrt(sqrMagnitude);
+	
 	public Vector2 value { get; set; }
 
 	public static implicit operator Vector2(Value2 v) => v.value;

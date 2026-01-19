@@ -345,6 +345,14 @@ public class Force3 : Value3 {
 public class Length3 : Value3 {
 	public Length3(Vector3 value, float scale = 1) : base(value, scale) { }
 
+	public static Length3 operator +(Length3 left, Velocity3 right) {
+		return Add(left, right.Length3(Time.deltaTime));
+	}
+
+	public static Length3 operator -(Length3 left, Velocity3 right) {
+		return Sub(left, right.Length3(Time.deltaTime));
+	}
+	
 	public static Length3 operator +(Length3 left, Length3 right) {
 		return Add(left, right);
 	}
@@ -356,6 +364,19 @@ public class Length3 : Value3 {
 
 public class Velocity3 : Value3 {
 	public Velocity3(Vector3 value, float scale = 1) : base(value, scale) { }
+	public Velocity3(Length3 length, Time time) : base(length.value / time.value) { }
+	
+	public Length3 Length3(Time time) {
+		return new Length3(value * time);
+	}
+
+	public static Velocity3 operator +(Velocity3 left, Acceleration3 right) {
+		return Add(left, right.Velocity3(Time.deltaTime));
+	}
+
+	public static Velocity3 operator -(Velocity3 left, Acceleration3 right) {
+		return Sub(left, right.Velocity3(Time.deltaTime));
+	}
 
 	public static Velocity3 operator +(Velocity3 left, Velocity3 right) {
 		return Add(left, right);
@@ -368,6 +389,11 @@ public class Velocity3 : Value3 {
 
 public class Acceleration3 : Value3 {
 	public Acceleration3(Vector3 value, float scale = 1) : base(value, scale) { }
+	public Acceleration3(Force3 force, Mass mass) : base(force.value / mass.value) { }
+	
+	public Velocity3 Velocity3(Time time) {
+		return new Velocity3(value * time);
+	}
 
 	public static Force3 operator *(Acceleration3 left, Mass right) {
 		return new Force3(left.value * right.value);
@@ -376,7 +402,7 @@ public class Acceleration3 : Value3 {
 	public static Force3 operator *(Mass left, Acceleration3 right) {
 		return new Force3(right.value * left.value);
 	}
-
+	
 	public static Acceleration3 operator +(Acceleration3 left, Acceleration3 right) {
 		return Add(left, right);
 	}
@@ -389,6 +415,11 @@ public class Acceleration3 : Value3 {
 public class Angle3 : Value3 {
 	public Angle3(Vector3 value, float scale = 1) : base(value, scale) { }
 
+	public Vector3 ToDirection() {
+		// Insert unity's euler to direction method
+		return value;
+	}
+	
 	public static Angle3 operator +(Angle3 left, Angle3 right) {
 		return Add(left, right);
 	}
@@ -403,6 +434,9 @@ public class Value3 {
 		this.value = value * scale;
 	}
 
+	public float sqrMagnitude => value.x*value.x + value.y*value.y + value.z*value.z;
+	public float magnitude => MathF.Sqrt(sqrMagnitude);
+	
 	public Vector3 value { get; set; }
 
 	public static implicit operator Vector3(Value3 v) => v.value;

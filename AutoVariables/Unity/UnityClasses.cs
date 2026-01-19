@@ -14,6 +14,8 @@ public struct Vector2 {
 		this.y = y;
 	}
 	
+	public Vector2 normalized => new(x, y);
+	
 	public static Vector2 operator +(Vector2 l, Vector2 r) {
 		return new Vector2 {
 			x = l.x + r.x,
@@ -81,6 +83,8 @@ public struct Vector3 {
 		this.y = y;
 		this.z = z;
 	}
+	
+	public Vector3 normalized => new(x, y, z);
 	
 	public static Vector3 operator +(Vector3 l, Vector3 r) {
 		return new Vector3 {
