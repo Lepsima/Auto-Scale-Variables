@@ -13,7 +13,7 @@ public class TEST {
 		Length2 pos = Meter(new Vector2(0, 0));
 		
 		// For direction a normal vector2 is used because direction doesn't have a scale
-		Vector2 dir = new(0.8f, 0.3f);
+		Vector2 dir = new(0.8f, 0.2f);
 		
 		while (true) {
 			vel += dir * accel;
