@@ -21,7 +21,7 @@ jobs:
         packages: ["AutoVariables"]
     runs-on: ubuntu-latest
     env:
-      packagePath: Source/${{ matrix.packages }}
+      packagePath: ${{ matrix.packages }}
     outputs:
       unityPackage: ${{ steps.write_output.outputs.unityPackage }}
       zipFile: ${{ steps.write_output.outputs.zipFile }}
