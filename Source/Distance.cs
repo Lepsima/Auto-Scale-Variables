@@ -4,7 +4,7 @@ using static AutoScaleVariables.Scales;
 namespace AutoScaleVariables {
 
 public class TEST {
-	public void T() {
+	public static void T() {
 		Mass mass = KiloGram(1500);
 		Force force = KiloNewton(2);
 		
