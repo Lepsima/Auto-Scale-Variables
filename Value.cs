@@ -1,7 +1,22 @@
-﻿using static AutoScaleVariables.Scales;
+﻿using UnityEngine;
+using static AutoScaleVariables.Scales;
 
 namespace AutoScaleVariables {
 public abstract partial class Scales {
+	public static Velocity KilometerHour(float value) {
+		Length km = KiloMeter(value);
+		Time hour = Hour(1);
+		return new Velocity(km, hour);
+	}
+
+	public static Time Minute(float value) {
+		return new Time(value, 60);
+	}
+
+	public static Time Hour(float value) {
+		return new Time(value, 3600f);
+	}
+
 	public static Angle Degree(float value) {
 		return new Angle(value);
 	}
@@ -244,8 +259,8 @@ public abstract partial class Scales {
 }
 
 public class Time : Value {
-	private static Time _static = Second(0);
-	
+	private static readonly Time _static = Second(0);
+
 	public Time(float value, float scale = 1) : base(value, scale) { }
 
 	public static Time deltaTime {
@@ -254,7 +269,7 @@ public class Time : Value {
 			return _static;
 		}
 	}
-	
+
 	public static Time time {
 		get {
 			_static.value = UnityEngine.Time.time;
@@ -302,6 +317,8 @@ public class Mass : Value {
 public class Force : Value {
 	public Force(float value, float scale = 1) : base(value, scale) { }
 
+	public Force(Acceleration accel, Mass mass) : base(accel * mass) { }
+
 	public static Force operator +(Force left, Force right) {
 		return Add(left, right);
 	}
@@ -321,11 +338,11 @@ public class Force : Value {
 
 public class Length : Value {
 	public Length(float value, float scale = 1) : base(value, scale) { }
-	
+
 	public static Length operator +(Length left, Velocity right) {
 		return Add(left, right.Length(Time.deltaTime));
 	}
-	
+
 	public static Length operator -(Length left, Velocity right) {
 		return Sub(left, right.Length(Time.deltaTime));
 	}
@@ -350,18 +367,20 @@ public class Length : Value {
 public class Velocity : Value {
 	public Velocity(float value, float scale = 1) : base(value, scale) { }
 
+	public Velocity(Length length, Time time) : base(length.value / time.value) { }
+
 	public Length Length(Time time) {
 		return new Length(value * time);
-	}	
-	
+	}
+
 	public static Velocity operator +(Velocity left, Acceleration right) {
 		return Add(left, right.Velocity(Time.deltaTime));
 	}
-	
+
 	public static Velocity operator -(Velocity left, Acceleration right) {
 		return Sub(left, right.Velocity(Time.deltaTime));
 	}
-	
+
 	public static Velocity operator +(Velocity left, Velocity right) {
 		return Add(left, right);
 	}
@@ -381,10 +400,30 @@ public class Velocity : Value {
 
 public class Acceleration : Value {
 	public Acceleration(float value, float scale = 1) : base(value, scale) { }
-	
+
+	public Acceleration(Force force, Mass mass) : base(force.value / mass.value) { }
+
 	public Velocity Velocity(Time time) {
 		return new Velocity(value * time);
 	}
+
+	public static Acceleration2 operator *(Vector2 left, Acceleration right) {
+		return new Acceleration2(left * right.value);
+	}
+
+	public static Acceleration2 operator *(Acceleration left, Vector2 right) {
+		return new Acceleration2(right * left.value);
+	}
+
+
+	public static Acceleration3 operator *(Vector3 left, Acceleration right) {
+		return new Acceleration3(left * right.value);
+	}
+
+	public static Acceleration3 operator *(Acceleration left, Vector3 right) {
+		return new Acceleration3(right * left.value);
+	}
+
 
 	public static Acceleration operator +(Acceleration left, Acceleration right) {
 		return Add(left, right);
@@ -405,7 +444,7 @@ public class Acceleration : Value {
 
 public class Angle : Value {
 	public Angle(float value, float scale = 1) : base(value, scale) { }
-	
+
 	public static Angle operator +(Angle left, Angle right) {
 		return Add(left, right);
 	}
@@ -429,7 +468,7 @@ public class Value {
 	}
 
 	public float value { get; set; }
-	
+
 	public static implicit operator float(Value v) => v.value;
 
 	protected static T Add<T>(T left, T right) where T : Value {

@@ -5,22 +5,22 @@ namespace AutoScaleVariables {
 
 public class TEST {
 	public void T() {
-		Length position = Meter(0);
-		Velocity velocity = MeterSecond(10);
+		Mass mass = KiloGram(1500);
+		Force force = KiloNewton(2);
 		
-		// let's say Time.deltaTime is 1/50 
+		Acceleration accel = new(force, mass);
+		Velocity2 vel = MeterSecond(new Vector2(0, 0));
+		Length2 pos = Meter(new Vector2(0, 0));
 		
-		for (int i = 0; i < 50; i++) {
-			//position += velocity;
+		// For direction a normal vector2 is used because direction doesn't have a scale
+		Vector2 dir = new(0.2f, 0.8f);
+		
+		while (true) {
+			vel += dir * accel;
+			pos += vel;
 		}
-		
-		Debug.Log(position);
 	}
 }
-
-/*
-		
- */
 
 
 public enum Unit {
