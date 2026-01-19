@@ -2,6 +2,8 @@ name: Create Unity Package
 
 on:
   push:
+    branches:
+      - master
     tags:
       - '*'
 
