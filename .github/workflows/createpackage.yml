@@ -1,0 +1,41 @@
+name: Create Unity Package
+
+on:
+  push:
+    tags:
+    - '**'
+
+jobs:
+  Create:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - run: |
+        echo "source.meta" > metaList
+        find Source/ -name \*.meta >> metaList
+
+    - uses: pCYSl5EDgo/create-unitypackage@master
+      with:
+        package-path: AutoVariables.unitypackage
+        include-files: metaList
+    
+    - name: Create Release
+      id: create_release
+      uses: actions/create-release@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        tag_name: ${{ github.ref }}
+        release_name: ${{ github.ref }}
+        draft: false
+        prerelease: false
+    
+    - name: Upload Release Asset
+      uses: actions/upload-release-asset@master
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        upload_url: ${{ steps.create_release.outputs.upload_url }}
+        asset_path: AutoVariables.unitypackage
+        asset_name: AutoVariables.unitypackage
+        asset_content_type: application/gzip
