@@ -32,6 +32,18 @@ public class Whatever {
 		{ "Kilo", "1000" },
 		{ "Mega", "1000000" },
 	};
+	
+	public Dictionary<string, string> scales2  = new() {
+		{ "Micro", "1000000" },
+		{ "Milli", "1000" },
+		{ "Centi", "100" },
+		{ "Deci", "10" },
+		{ "", "1" },
+		{ "Deca", "0.1f" },
+		{ "Hecto", "0.01f" },
+		{ "Kilo", "0.001f" },
+		{ "Mega", "0.000001f" },
+	};
 
 	// public Force KiloNewton(&5 value) { return new Force(value, 1000) }
 	public const string Pattern = "public static &1 &2&3(&5 value) => new(value, &4);";
@@ -41,9 +53,26 @@ public class Whatever {
 	public const string Patter3 =
 		"public class &6 {\n\tprivate readonly &5 value;\n\tprivate readonly float scale;\n\tprivate readonly Unit unit;\n\tprivate readonly int dimension;\n\n\tprotected &6(&5 value, float scale = 1, int dimension = 1, Unit unit = Unit.INVALID) {\n\t\tthis.value = value;\n\t\tthis.scale = scale;\n\t\tthis.dimension = dimension;\n\t\tthis.unit = unit;\n\t}\n\n\tprivate &6 Clone(&5 value) {\n\t\treturn new &6(value, scale, dimension, unit);\n\t}\n\n\tprivate &5 GetValue() {\n\t\treturn Dimension.Apply(value * scale, dimension);\n\t}\n\n\tprivate bool Compatible(&6 other) {\n\t\treturn unit == other.unit;\n\t}\n\n\tprotected static T Add<T>(T left, T right) where T : &6{\n\t\tif (!right.Compatible(left)) throw new UnitException(right.unit + \" is not compatible with \" + left.unit);\n\t\t&5 val = left.GetValue() + right.GetValue();\n\t\treturn (T)left.Clone(val);\n\t}\n\n\tprotected static T Sub<T>(T left, T right) where T : &6{\n\t\tif (!right.Compatible(left)) throw new UnitException(right.unit + \" is not compatible with \" + left.unit);\n\t\t&5 val = left.GetValue() - right.GetValue();\n\t\treturn (T)left.Clone(val);\n\t}\n\n\tprotected static T Mul<T>(T left, T right) where T : &6{\n\t\tif (!right.Compatible(left)) throw new UnitException(right.unit + \" is not compatible with \" + left.unit);\n\t\t&5 val = left.GetValue() * right.GetValue();\n\t\treturn (T)left.Clone(val);\n\t}\n\n\tprotected static T Div<T>(T left, T right) where T : &6{\n\t\tif (!right.Compatible(left)) throw new UnitException(right.unit + \" is not compatible with \" + left.unit);\n\t\t&5 val = left.GetValue() / right.GetValue();\n\t\treturn (T)left.Clone(val);\n\t}\n}";
 
+	public const string Pattern4 = "public static &1 As&2&3(this &4 value) => value.value * &5;";
+	
 	private string value;
 	private string value2;
 	private string value3;
+
+	public string Gen4() {
+		return (from keyValuePair in unitToNames
+				let unit = keyValuePair.Value
+				let unitName = keyValuePair.Key
+				from valuePair in scales2
+				let scale = valuePair.Key
+				let number = valuePair.Value
+				select Pattern4.Replace("&1", value)
+					.Replace("&2", scale)
+					.Replace("&3", unit)
+					.Replace("&4", unitName + value3)
+					.Replace("&5", number)
+			).Aggregate("", (current, pat) => current + (pat + "\n"));
+	}
 	
 	public Whatever(string value, string value2, string value3) {
 		this.value = value;
