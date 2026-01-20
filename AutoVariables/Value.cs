@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Unity.VisualScripting;
+using UnityEngine;
 using static AutoScaleVariables.Scales;
 
 namespace AutoScaleVariables {
@@ -7,6 +8,10 @@ public abstract partial class Scales {
 		Length km = KiloMeter(value);
 		Time hour = Hour(1);
 		return new Velocity(km, hour);
+	}
+	
+	public static ForceAccel NewtonSecond(float value) {
+		return new ForceAccel(value);
 	}
 
 	public static Time Minute(float value) {
@@ -332,6 +337,38 @@ public class Force : Value {
 	}
 
 	public static Force operator /(Force left, Force right) {
+		return Div(left, right);
+	}
+}
+
+public class ForceAccel : Value {
+	public ForceAccel(float value, float scale = 1) : base(value, scale) { }
+
+	public Force Force(Time time) {
+		return new Force(value * time);
+	}
+	
+	public static Force operator +(Force left, ForceAccel right) {
+		return Add(left, right.Force(Time.deltaTime));
+	}
+
+	public static Force operator -(Force left, ForceAccel right) {
+		return Sub(left, right.Force(Time.deltaTime));
+	}
+	
+	public static ForceAccel operator +(ForceAccel left, ForceAccel right) {
+		return Add(left, right);
+	}
+
+	public static ForceAccel operator -(ForceAccel left, ForceAccel right) {
+		return Sub(left, right);
+	}
+
+	public static ForceAccel operator *(ForceAccel left, ForceAccel right) {
+		return Mul(left, right);
+	}
+
+	public static ForceAccel operator /(ForceAccel left, ForceAccel right) {
 		return Div(left, right);
 	}
 }

@@ -3,6 +3,64 @@ using static AutoScaleVariables.Scales;
 
 namespace AutoScaleVariables {
 public abstract partial class Scales {
+	public static Velocity3 KilometerHour(Vector3 value) {
+		Length3 km = KiloMeter(value);
+		Time hour = Hour(1);
+		return new Velocity3(km, hour);
+	}
+
+	public static Angle3 Degree(Vector3 value) {
+		return new Angle3(value);
+	}
+
+	public static Angle3 MinuteDegree(Vector3 value) {
+		return new Angle3(value, 0.016666666666666666f);
+	}
+
+	public static Angle3 SecondDegree(Vector3 value) {
+		return new Angle3(value, 0.0002777777777777778f);
+	}
+
+	public static Angle3 Radian(Vector3 value) {
+		return new Angle3(value, 0.01745329238474369f);
+	}
+
+	public static Angle3 Turn(Vector3 value) {
+		return new Angle3(value, 360);
+	}
+	
+	public static Velocity3 KilometerHour(float x, float y, float z) {
+		Vector3 value = new(x, y, z);
+		Length3 km = KiloMeter(value);
+		Time hour = Hour(1);
+		return new Velocity3(km, hour);
+	}
+
+	public static Angle3 Degree(float x, float y, float z) {
+		Vector3 value = new(x, y, z);
+		return new Angle3(value);
+	}
+
+	public static Angle3 MinuteDegree(float x, float y, float z) {
+		Vector3 value = new(x, y, z);
+		return new Angle3(value, 0.016666666666666666f);
+	}
+
+	public static Angle3 SecondDegree(float x, float y, float z) {
+		Vector3 value = new(x, y, z);
+		return new Angle3(value, 0.0002777777777777778f);
+	}
+
+	public static Angle3 Radian(float x, float y, float z) {
+		Vector3 value = new(x, y, z);
+		return new Angle3(value, 0.01745329238474369f);
+	}
+
+	public static Angle3 Turn(float x, float y, float z) {
+		Vector3 value = new(x, y, z);
+		return new Angle3(value, 360);
+	}
+	
 	public static Force3 MicroNewton(Vector3 value) {
 		return new Force3(value, 0.000001f);
 	}
@@ -434,8 +492,26 @@ public class Value3 {
 		this.value = value * scale;
 	}
 
+	public static Angle AngleBetween(Value3 a, Value3 b) {
+		return Degree(Vector3.Angle(a.value, b.value));
+	}
+
+	public Value3 Clone() {
+		return new Value3(value);
+	}
+
+	public void Normalize() {
+		value = value.normalized;
+	}
+
+	public Vector3 normalized => value.normalized;
+	
 	public float sqrMagnitude => value.x*value.x + value.y*value.y + value.z*value.z;
-	public float magnitude => MathF.Sqrt(sqrMagnitude);
+	public float magnitude => Mathf.Sqrt(sqrMagnitude);
+	
+	public float x => value.x;
+	public float y => value.y;
+	public float z => value.z;
 	
 	public Vector3 value { get; set; }
 
@@ -448,16 +524,6 @@ public class Value3 {
 
 	protected static T Sub<T>(T left, T right) where T : Value3 {
 		left.value = (Vector3)left - right;
-		return left;
-	}
-
-	protected static T Mul<T>(T left, T right) where T : Value3 {
-		left.value = (Vector3)left * right;
-		return left;
-	}
-
-	protected static T Div<T>(T left, T right) where T : Value3 {
-		left.value = (Vector3)left / right;
 		return left;
 	}
 }

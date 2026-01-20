@@ -3,6 +3,64 @@ using static AutoScaleVariables.Scales;
 
 namespace AutoScaleVariables {
 public abstract partial class Scales {
+	public static Velocity2 KilometerHour(Vector2 value) {
+		Length2 km = KiloMeter(value);
+		Time hour = Hour(1);
+		return new Velocity2(km, hour);
+	}
+
+	public static Angle2 Degree(Vector2 value) {
+		return new Angle2(value);
+	}
+
+	public static Angle2 MinuteDegree(Vector2 value) {
+		return new Angle2(value, 0.016666666666666666f);
+	}
+
+	public static Angle2 SecondDegree(Vector2 value) {
+		return new Angle2(value, 0.0002777777777777778f);
+	}
+
+	public static Angle2 Radian(Vector2 value) {
+		return new Angle2(value, 0.01745329238474369f);
+	}
+
+	public static Angle2 Turn(Vector2 value) {
+		return new Angle2(value, 360);
+	}
+	
+	public static Velocity2 KilometerHour(float x, float y) {
+		Vector2 value = new(x, y);
+		Length2 km = KiloMeter(value);
+		Time hour = Hour(1);
+		return new Velocity2(km, hour);
+	}
+
+	public static Angle2 Degree(float x, float y) {
+		Vector2 value = new(x, y);
+		return new Angle2(value);
+	}
+
+	public static Angle2 MinuteDegree(float x, float y) {
+		Vector2 value = new(x, y);
+		return new Angle2(value, 0.016666666666666666f);
+	}
+
+	public static Angle2 SecondDegree(float x, float y) {
+		Vector2 value = new(x, y);
+		return new Angle2(value, 0.0002777777777777778f);
+	}
+
+	public static Angle2 Radian(float x, float y) {
+		Vector2 value = new(x, y);
+		return new Angle2(value, 0.01745329238474369f);
+	}
+
+	public static Angle2 Turn(float x, float y) {
+		Vector2 value = new(x, y);
+		return new Angle2(value, 360);
+	}
+	
 	public static Force2 MicroNewton(Vector2 value) {
 		return new Force2(value, 0.000001f);
 	}
@@ -471,7 +529,7 @@ public class Value2 {
 	}
 
 	public float sqrMagnitude => value.x*value.x + value.y*value.y;
-	public float magnitude => MathF.Sqrt(sqrMagnitude);
+	public float magnitude => Mathf.Sqrt(sqrMagnitude);
 	
 	public Vector2 value { get; set; }
 
