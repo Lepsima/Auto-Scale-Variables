@@ -1,4 +1,7 @@
+using System;
+
 namespace AutoScaleVariables {
+[Serializable]
 public class Time : Value {
 	private static readonly Time _static = Unit.Second(0);
 

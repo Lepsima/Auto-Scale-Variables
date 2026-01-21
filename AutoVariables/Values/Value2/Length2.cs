@@ -1,6 +1,8 @@
 using UnityEngine;
+using System;
 
 namespace AutoScaleVariables {
+[Serializable]
 public class Length2 : Value2 {
 	public Length2(Vector2 value, float scale = 1) : base(value, scale) { }
 

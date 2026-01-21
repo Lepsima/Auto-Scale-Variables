@@ -1,10 +1,19 @@
 ﻿using UnityEngine;
+using System;
 
 namespace AutoScaleVariables {
+[Serializable]
 public class Value3 {
 	public Value3(Vector3 value, float scale = 1) => this.value = value * scale;
 
-	public Vector3 value { get; set; }
+	[SerializeField]
+	private Vector3 _value;
+
+	public Vector3 value {
+		get => _value;
+		set => _value = value;
+	}
+
 	public Vector3 normalized => value.normalized;
 	public float sqrMagnitude => value.x * value.x + value.y * value.y + value.z * value.z;
 	public float magnitude => Mathf.Sqrt(sqrMagnitude);

@@ -1,4 +1,7 @@
+using System;
+
 namespace AutoScaleVariables {
+[Serializable]
 public class Mass : Value {
 	public Mass(float value, float scale = 1) : base(value, scale) { }
 

@@ -1,6 +1,8 @@
 using UnityEngine;
+using System;
 
 namespace AutoScaleVariables {
+[Serializable]
 public class Force3 : Value3 {
 	public Force3(Acceleration3 accel, Mass mass) : base(accel * mass) { }
 

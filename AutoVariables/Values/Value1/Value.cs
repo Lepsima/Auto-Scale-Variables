@@ -1,8 +1,18 @@
-﻿namespace AutoScaleVariables {
+﻿using System;
+using UnityEngine;
+
+namespace AutoScaleVariables {
+[Serializable]
 public class Value {
 	public Value(float value, float scale = 1) => this.value = value * scale;
 
-	public float value { get; set; }
+	[SerializeField]
+	private float _value;
+	
+	public float value {
+		get => _value;
+		set => _value = value;
+	}
 
 	public static implicit operator float(Value v) => v.value;
 

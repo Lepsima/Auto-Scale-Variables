@@ -1,4 +1,7 @@
+using System;
+
 namespace AutoScaleVariables {
+[Serializable]
 public class Length : Value {
 	public Length(float value, float scale = 1) : base(value, scale) { }
 

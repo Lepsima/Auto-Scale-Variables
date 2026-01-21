@@ -1,4 +1,7 @@
+using System;
+
 namespace AutoScaleVariables {
+[Serializable]
 public class Angle : Value {
 	public Angle(float value, float scale = 1) : base(value, scale) { }
 
