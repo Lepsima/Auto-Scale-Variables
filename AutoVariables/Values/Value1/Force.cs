@@ -1,4 +1,7 @@
+using System;
+
 namespace AutoScaleVariables {
+[Serializable]
 public class Force : Value {
 	public Force(float value, float scale = 1) : base(value, scale) { }
 
