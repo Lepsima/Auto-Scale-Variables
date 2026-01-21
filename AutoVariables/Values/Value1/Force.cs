@@ -7,6 +7,8 @@ public class Force : Value {
 
 	public Force(Acceleration accel, Mass mass) : base(accel * mass) { }
 
+	public Force() { }
+
 	public static Force operator +(Force left, Force right) => Add(left, right);
 
 	public static Force operator -(Force left, Force right) => Sub(left, right);

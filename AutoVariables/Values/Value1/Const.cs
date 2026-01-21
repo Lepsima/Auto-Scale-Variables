@@ -5,6 +5,8 @@ namespace AutoScaleVariables {
 public class Const : Value {
 	public Const(float value, float scale = 1) : base(value, scale) { }
 
+	public Const() { }
+
 	public static Const operator +(Const left, Const right) => Add(left, right);
 
 	public static Const operator -(Const left, Const right) => Sub(left, right);

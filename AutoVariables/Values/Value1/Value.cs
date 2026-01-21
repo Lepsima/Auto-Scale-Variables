@@ -3,7 +3,8 @@ using UnityEngine;
 
 namespace AutoScaleVariables {
 [Serializable]
-public class Value {
+public abstract class Value {
+	public Value() {}
 	public Value(float value, float scale = 1) => this.value = value * scale;
 
 	[SerializeField]

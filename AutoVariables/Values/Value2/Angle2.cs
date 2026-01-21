@@ -3,8 +3,10 @@ using System;
 
 namespace AutoScaleVariables {
 [Serializable]
-public class Angle2 : Value2 {
+public class Angle2 : Value2<Angle> {
 	public Angle2(Vector2 value, float scale = 1) : base(value, scale) { }
+
+	public Angle2() { }
 
 	public static Angle2 operator +(Angle2 left, Angle2 right) => Add(left, right);
 

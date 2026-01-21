@@ -3,9 +3,11 @@ using System;
 
 namespace AutoScaleVariables {
 [Serializable]
-public class Force2 : Value2 {
+public class Force2 : Value2<Force> {
 	public Force2(Vector2 value, float scale = 1) : base(value, scale) { }
 	public Force2(Acceleration2 accel, Mass mass) : base(accel * mass) { }
+
+	public Force2() { }
 
 	public static Force2 operator +(Force2 left, Force2 right) => Add(left, right);
 

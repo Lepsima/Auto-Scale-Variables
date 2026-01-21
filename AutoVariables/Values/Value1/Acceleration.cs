@@ -8,6 +8,8 @@ public class Acceleration : Value {
 
 	public Acceleration(Force force, Mass mass) : base(force.value / mass.value) { }
 
+	public Acceleration() { }
+
 	public Velocity Velocity(Time time) => new(value * time);
 
 	public static Acceleration2 operator *(Vector2 left, Acceleration right) => new(left.normalized * right.value);

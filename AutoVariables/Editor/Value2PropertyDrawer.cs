@@ -3,13 +3,15 @@ using UnityEditor;
 using UnityEditor.UIElements;
 using UnityEngine.UIElements;
 
-[CustomPropertyDrawer(typeof(Value2), true)]
+[CustomPropertyDrawer(typeof(Value2<>), true)]
 public class Value2PropertyDrawer : PropertyDrawer {
 
 	public override VisualElement CreatePropertyGUI(SerializedProperty property) {
 		VisualElement container = new();
 		string help = property.type switch {
 			"Value2" => "(?)",
+			"Const2" => "(constant)",
+			"Direction2" => "(direction)",
 			"Angle2" => "(degrees)",
 			"Force2" => "(newtons)",
 			"Length2" => "(meters)",

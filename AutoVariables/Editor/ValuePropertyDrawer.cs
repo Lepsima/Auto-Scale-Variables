@@ -10,6 +10,7 @@ public class ValuePropertyDrawer : PropertyDrawer {
 		VisualElement container = new();
 		string help = property.type switch {
 			"Value" => "(?)",
+			"Magnitude" => "(any)",
 			"Time" => "(seconds)",
 			"Const" => "(constant)",
 			"Mass" => "(gram)",

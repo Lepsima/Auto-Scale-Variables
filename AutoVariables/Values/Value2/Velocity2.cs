@@ -3,10 +3,12 @@ using System;
 
 namespace AutoScaleVariables {
 [Serializable]
-public class Velocity2 : Value2 {
+public class Velocity2 : Value2<Velocity> {
 	public Velocity2(Vector2 value, float scale = 1) : base(value, scale) { }
 
 	public Velocity2(Length2 length, Time time) : base(length.value / time.value) { }
+
+	public Velocity2() { }
 
 	public Length2 Length2(Time time) => new(value * time);
 

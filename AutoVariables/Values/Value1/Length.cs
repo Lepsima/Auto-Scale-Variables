@@ -5,6 +5,8 @@ namespace AutoScaleVariables {
 public class Length : Value {
 	public Length(float value, float scale = 1) : base(value, scale) { }
 
+	public Length() { }
+
 	public static Length operator +(Length left, Velocity right) => Add(left, right.Length(Time.deltaTime));
 
 	public static Length operator -(Length left, Velocity right) => Sub(left, right.Length(Time.deltaTime));

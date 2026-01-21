@@ -7,6 +7,8 @@ public class Velocity : Value {
 
 	public Velocity(Length length, Time time) : base(length.value / time.value) { }
 
+	public Velocity() { }
+
 	public Length Length(Time time) => new(value * time);
 
 	public static Velocity operator +(Velocity left, Acceleration right) => Add(left, right.Velocity(Time.deltaTime));
