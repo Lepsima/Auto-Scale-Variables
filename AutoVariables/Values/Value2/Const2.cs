@@ -3,8 +3,10 @@ using UnityEngine;
 
 namespace AutoScaleVariables {
 [Serializable]
-public class Const2 : Value2 {
+public class Const2 : Value2<Const> {
 	public Const2(Vector2 value, float scale = 1) : base(value, scale) { }
+
+	public Const2() { }
 
 	public static Const2 operator +(Const2 left, Const2 right) => Add(left, right);
 

@@ -22,6 +22,7 @@ public class Value3PropertyDrawer : PropertyDrawer {
 
 		PropertyField nameField = new(property.FindPropertyRelative("_value"), property.displayName + " " + help);
 		container.Add(nameField);
+		container.Add(nameField);
 		return container;
 	}
 }
