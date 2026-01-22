@@ -21,6 +21,7 @@ public class VelocityUI : ValueUI {
 	}
 }
 
+[System.Serializable]
 public class Velocity2UI : Value2UI {
 	public VelocityUIType type;
 		
@@ -39,6 +40,7 @@ public class Velocity2UI : Value2UI {
 	}
 }
 
+[System.Serializable]
 public class Velocity3UI : Value3UI {
 	public VelocityUIType type;
 	

@@ -4,6 +4,9 @@ namespace AutoScaleVariables {
 [Serializable]
 public class ForceAccel : Value {
 	public ForceAccel(float value, float scale = 1) : base(value, scale) { }
+	public ForceAccel(Force force, Time time) : base(force.value / time.value) { }
+
+	public ForceAccel() { }
 
 	public Force Force(Time time) => new(value * time);
 

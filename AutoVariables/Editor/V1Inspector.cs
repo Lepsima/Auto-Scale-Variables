@@ -11,9 +11,9 @@ public class V1Inspector : PropertyDrawer {
 		int indent = EditorGUI.indentLevel;
 		EditorGUI.indentLevel = 0;
 		
-		(Rect left, Rect right) = SplitRect(position, 0.25f);
-		FloatProperty(left, property);
-		EnumProperty(right, property);
+		(Rect left, Rect right) = SplitRect(position, 0.8f);
+		FloatProperty(right, property);
+		EnumProperty(left, property);
 
 		EditorGUI.indentLevel = indent;
 		EditorGUI.EndProperty();

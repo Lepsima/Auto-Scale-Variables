@@ -22,6 +22,7 @@ public static partial class Unit {
 	}
 
 	public static ForceAccel NewtonSecond(float value) => new(value);
+	public static ForceAccel KiloNewtonSecond(float value) => new(KiloNewton(value));
 
 	public static Time Minute(float value) => new(value, 60);
 

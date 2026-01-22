@@ -29,6 +29,8 @@ public static partial class Unit {
 		return new Velocity2(km, hour);
 	}
 
+	public static ForceAccel2 NewtonSecond(Vector2 value) => new(value);
+	public static ForceAccel2 KiloNewtonSecond(Vector2 value) => new(KiloNewton(value), Second(1));
 	public static Angle2 Degree(Vector2 value) => new(value);
 
 	public static Angle2 MinuteDegree(Vector2 value) => new(value, 0.016666666666666666f);

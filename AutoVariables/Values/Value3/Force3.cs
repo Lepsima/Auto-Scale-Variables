@@ -10,6 +10,10 @@ public class Force3 : Value3<Force> {
 
 	public Force3() { }
 
+	public static Force3 operator +(Force3 left, ForceAccel3 right) => Add(left, right.Force(Time.deltaTime));
+
+	public static Force3 operator -(Force3 left, ForceAccel3 right) => Sub(left, right.Force(Time.deltaTime));
+	
 	public static Force3 operator +(Force3 left, Force3 right) => Add(left, right);
 
 	public static Force3 operator -(Force3 left, Force3 right) => Sub(left, right);

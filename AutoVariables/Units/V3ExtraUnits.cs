@@ -27,7 +27,8 @@ public static partial class Unit {
 		Time hour = Hour(1);
 		return new Velocity3(km, hour);
 	}
-
+	public static ForceAccel3 NewtonSecond(Vector3 value) => new(value);
+	public static ForceAccel3 KiloNewtonSecond(Vector3 value) => new(KiloNewton(value));
 	public static Angle3 Degree(Vector3 value) => new(value);
 
 	public static Angle3 MinuteDegree(Vector3 value) => new(value, 0.016666666666666666f);
