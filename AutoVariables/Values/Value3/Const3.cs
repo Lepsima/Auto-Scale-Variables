@@ -8,6 +8,8 @@ public class Const3 : Value3<Const> {
 
 	public Const3() { }
 
+	public Const3(Const c1, Const c2, Const c3) : base(new Vector3(c1, c2, c3)) { }
+
 	public static Const3 operator +(Const3 left, Const3 right) => Add(left, right);
 
 	public static Const3 operator -(Const3 left, Const3 right) => Sub(left, right);

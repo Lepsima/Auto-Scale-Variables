@@ -7,6 +7,8 @@ public class Time : Value {
 
 	public Time(float value, float scale = 1) : base(value, scale) { }
 
+	public Time() { }
+
 	public static Time deltaTime {
 		get {
 			_static.value = UnityEngine.Time.deltaTime;

@@ -4,7 +4,7 @@ using System;
 namespace AutoScaleVariables {
 [Serializable]
 public abstract class Value3<V1> where V1 : Value, new() {
-	public Value3() { }
+	public Value3() {}
 	public Value3(Vector3 value, float scale = 1) => this.value = value * scale;
 
 	[SerializeField] private Vector3 _value;
@@ -15,8 +15,8 @@ public abstract class Value3<V1> where V1 : Value, new() {
 	}
 
 	public virtual Direction3 normalized => new(value.normalized);
-	public virtual V1 sqrMagnitude => new() { value = value.x * value.x + value.y * value.y };
-	public virtual V1 magnitude => new() { value = Mathf.Sqrt(sqrMagnitude) };
+	public virtual V1 sqrMagnitude => new() { value = value.sqrMagnitude };
+	public virtual V1 magnitude => new() { value = value.magnitude };
 
 	public V1 x => new() { value = value.x };
 	public V1 y => new() { value = value.y };

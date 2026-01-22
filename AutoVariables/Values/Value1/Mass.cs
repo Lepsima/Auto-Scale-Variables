@@ -5,6 +5,8 @@ namespace AutoScaleVariables {
 public class Mass : Value {
 	public Mass(float value, float scale = 1) : base(value, scale) { }
 
+	public Mass() { }
+
 	public static Mass operator +(Mass left, Mass right) => Add(left, right);
 
 	public static Mass operator -(Mass left, Mass right) => Sub(left, right);

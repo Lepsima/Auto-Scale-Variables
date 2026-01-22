@@ -5,7 +5,6 @@ using UnityEngine;
 [CustomPropertyDrawer(typeof(Value3UI), true)]
 public class V3Inspector : PropertyDrawer {
 	public override void OnGUI(Rect position, SerializedProperty property, GUIContent label) {
-		Debug.Log("B");
 		EditorGUI.BeginProperty(position, label, property);
 		position = EditorGUI.PrefixLabel(position, GUIUtility.GetControlID(FocusType.Passive), label);
 
@@ -36,7 +35,6 @@ public class V3Inspector : PropertyDrawer {
 	}
 	
 	private static void Vector3Property(Rect rect, SerializedProperty property) {
-		Debug.Log("a");
 		SerializedProperty valueProp = property.FindPropertyRelative("_value");
 		Vector3 v = valueProp.vector3Value;
 		float[] values = { v.x, v.y, v.z };

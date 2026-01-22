@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics.CodeAnalysis;
 using UnityEngine;
 
 namespace AutoScaleVariables {
@@ -17,24 +18,20 @@ public abstract class Value {
 
 	public static implicit operator float(Value v) => v.value;
 
-	protected static T Add<T>(T left, T right) where T : Value {
-		left.value = (float)left + right;
-		return left;
+	protected static T Add<T>(T left, T right) where T : Value, new() {
+		return new T { value = left + right };
 	}
 
-	protected static T Sub<T>(T left, T right) where T : Value {
-		left.value = (float)left - right;
-		return left;
+	protected static T Sub<T>(T left, T right) where T : Value, new() {
+		return new T { value = left - right };
 	}
 
-	protected static T Mul<T>(T left, T right) where T : Value {
-		left.value = (float)left * right;
-		return left;
+	protected static T Mul<T>(T left, T right) where T : Value, new() {
+		return new T { value = left * right };
 	}
 
-	protected static T Div<T>(T left, T right) where T : Value {
-		left.value = (float)left / right;
-		return left;
+	protected static T Div<T>(T left, T right) where T : Value, new() {
+		return new T { value = left / right };
 	}
 }
 }

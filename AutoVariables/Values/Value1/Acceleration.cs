@@ -6,7 +6,7 @@ namespace AutoScaleVariables {
 public class Acceleration : Value {
 	public Acceleration(float value, float scale = 1) : base(value, scale) { }
 
-	public Acceleration(Force force, Mass mass) : base(force.value / mass.value) { }
+	public Acceleration(Force force, Mass mass) : base(force.value / mass.AsKiloGram()) { }
 
 	public Acceleration() { }
 
