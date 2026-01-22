@@ -3,6 +3,26 @@ using static AutoScaleVariables.Unit;
 
 namespace AutoScaleVariables {
 public static partial class Unit {
+	
+	public static Length2 Feet(Vector2 value) => new(value, 3.280839895f);
+	
+	public static Length2 Mile(Vector2 value) => new(value, 1609.344f);
+	
+	public static Length2 Feet(float x, float y) {
+		return new Length2(new Vector2(x, y), 3.280839895f);
+	}
+	
+	public static Length2 Mile(float x, float y) {
+		return new Length2(new Vector2(x, y), 1609.344f);
+	}
+	
+	public static Velocity2 FeetSecond(Vector2 value) {
+		return new Velocity2(Feet(value), 1);
+	}
+	
+	public static Velocity2 MileHour(Vector2 value) {
+		return new Velocity2(Mile(value), Hour(1));
+	}
 	public static Velocity2 KilometerHour(Vector2 value) {
 		Length2 km = KiloMeter(value);
 		Time hour = Hour(1);

@@ -1,6 +1,7 @@
 using UnityEngine;
 
 namespace AutoScaleVariables {
+
 public static class Conversions {
 	public static float AsMicroSecond(this Time value) => value.value * 1000000;
 	public static float AsMilliSecond(this Time value) => value.value * 1000;
