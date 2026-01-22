@@ -1,5 +1,5 @@
 # Auto-Scale-Variables
-I gave variables a measurement scale (km, m, cm) and made them autoconvert to each other, including vector2 and vector3
+I gave variables a measurement scale (km, m, cm, N, kN, sec, hour, m/s, km/s, etc) and made them autoconvert to each other
 <br> Also conversion between Acceleraion -> Velocity -> Length, Force/Mass/Acceleration and more
 <br> The point is that it forces you to use the correct units and types to convert your variables so you make less mistakes
 
