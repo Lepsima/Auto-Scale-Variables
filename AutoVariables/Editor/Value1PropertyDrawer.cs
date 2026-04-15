@@ -3,8 +3,8 @@ using UnityEditor;
 using UnityEditor.UIElements;
 using UnityEngine.UIElements;
 
-[CustomPropertyDrawer(typeof(Value3<>), true)]
-public class Value3PropertyDrawer : PropertyDrawer {
+[CustomPropertyDrawer(typeof(Value), true)]
+public class ValuePropertyDrawer : PropertyDrawer {
 	
 	public override VisualElement CreatePropertyGUI(SerializedProperty property) {
 		VisualElement container = new();
