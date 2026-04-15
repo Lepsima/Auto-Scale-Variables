@@ -57,7 +57,9 @@ public static class Conversions {
 	public static float AsHectoMeterS2(this Acceleration value) => value.value * 0.01f;
 	public static float AsKiloMeterS2(this Acceleration value) => value.value * 0.001f;
 	public static float AsMegaMeterS2(this Acceleration value) => value.value * 0.000001f;
-
+	public static float AsKiloMeterHour(this Velocity value) => value.value / 3.6f;
+	
+	
 	public static Vector2 AsMicroNewton(this Force2 value) => value.value * 1000000;
 	public static Vector2 AsMilliNewton(this Force2 value) => value.value * 1000;
 	public static Vector2 AsCentiNewton(this Force2 value) => value.value * 100;

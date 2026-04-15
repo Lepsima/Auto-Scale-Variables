@@ -15,5 +15,9 @@ public class Angle3 : Value3<Angle> {
 	public static Angle3 operator *(Angle3 left, Angle3 right) => Mul(left, right);
 
 	public static Angle3 operator /(Angle3 left, Angle3 right) => Div(left, right);
+
+	public Angle pitch => x;
+	public Angle yaw => y;
+	public Angle roll => z;
 }
 }
